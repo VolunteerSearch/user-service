@@ -7,6 +7,6 @@ export class CreateAccountDto {
   @IsNotEmpty()
   username: string
 
-  @IsStrongPassword()
+  @IsStrongPassword({ minSymbols: 8 })
   password: string
 }
