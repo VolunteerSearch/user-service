@@ -1,34 +1,32 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
-import { Genders } from "../enums/genders";
-
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Genders } from '../enums/genders';
 
 @Entity()
 export class Profile {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column({ nullable: true })
-  age: number
+  age: number;
 
   @Column({ nullable: true, default: Genders.NOT_SPECIFIED })
-  gender: Genders
+  gender: Genders;
 
   @Column({ nullable: true })
-  pronounces: string[]
+  pronounces: string;
 
   @Column({ nullable: true })
-  profilePicture: string
+  profilePicture: string;
 
   @Column({ length: 1500 })
-  bio: string
+  bio: string;
 
   @Column()
-  location: string
+  location: string;
 
   @Column()
-  country: string
-
+  country: string;
 }

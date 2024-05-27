@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
+import { QueryFailedError } from 'typeorm';
 
 @Controller('account')
 export class AccountController {
@@ -9,7 +18,14 @@ export class AccountController {
 
   @Post()
   async create(@Body() createAccountDto: CreateAccountDto) {
-    await this.accountService.create(createAccountDto);
+    try{
+      await this.accountService.create(createAccountDto);
+      return;
+    } catch(e: any) {
+      if (e instanceof QueryFailedError) {
+        return;
+      }
+    }
   }
 
   @Get()
@@ -23,7 +39,10 @@ export class AccountController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateAccountDto: UpdateAccountDto,
+  ) {
     await this.accountService.update(+id, updateAccountDto);
   }
 

@@ -1,12 +1,12 @@
-import { IsEmail, IsNotEmpty, IsStrongPassword } from "class-validator";
+import { IsEmail, IsNotEmpty, IsStrongPassword } from 'class-validator';
 
 export class CreateAccountDto {
   @IsEmail()
-  email: string
+  email: string;
 
   @IsNotEmpty()
-  username: string
+  username: string;
 
   @IsStrongPassword({ minSymbols: 8 })
-  password: string
+  password: string;
 }

@@ -1,23 +1,27 @@
-import { Profile } from "src/profile/entities/profile.entity";  // TODO: Can I do something about such imports?
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import { Profile } from 'src/profile/entities/profile.entity'; // TODO: Can I do something about such imports?
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity()
 export class Account {
-
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column({ unique: true })
-  email: string
+  email: string;
 
   @Column({ unique: true })
-  username: string
+  username: string;
 
   @Column()
-  passwordHash: string
+  passwordHash: string;
 
   @OneToOne(() => Profile)
   @JoinColumn()
-  profile: Profile
-
+  profile: Profile;
 }

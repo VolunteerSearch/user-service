@@ -5,12 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Profile } from './entities/profile.entity';
 import { Repository } from 'typeorm';
 
-
 @Injectable()
 export class ProfileService {
   constructor(
     @InjectRepository(Profile)
-    private profileRepository: Repository<Profile>
+    private profileRepository: Repository<Profile>,
   ) {}
 
   async create(createProfileDto: CreateProfileDto) {
@@ -37,18 +36,21 @@ export class ProfileService {
   }
 
   async update(id: number, updateProfileDto: UpdateProfileDto) {
-    await this.profileRepository.update({
-      id: id,
-    }, {
-      name: updateProfileDto.name,
-      age: updateProfileDto.age,
-      bio: updateProfileDto.bio,
-      gender: updateProfileDto.gender,
-      country: updateProfileDto.country,
-      location: updateProfileDto.location,
-      profilePicture: updateProfileDto.profilePicture,
-      pronounces: updateProfileDto.pronounces,
-    });
+    await this.profileRepository.update(
+      {
+        id: id,
+      },
+      {
+        name: updateProfileDto.name,
+        age: updateProfileDto.age,
+        bio: updateProfileDto.bio,
+        gender: updateProfileDto.gender,
+        country: updateProfileDto.country,
+        location: updateProfileDto.location,
+        profilePicture: updateProfileDto.profilePicture,
+        pronounces: updateProfileDto.pronounces,
+      },
+    );
   }
 
   async remove(id: number) {

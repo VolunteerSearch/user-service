@@ -1,29 +1,26 @@
-import { IsNotEmpty, IsNumber, IsArray, Length, IsEnum } from "class-validator";
-import { Genders } from "../enums/genders";
+import { IsNotEmpty, IsNumber, Length, IsEnum } from 'class-validator';
+import { Genders } from '../enums/genders';
 
 export class CreateProfileDto {
-
   @IsNotEmpty()
-  name: string
+  name: string;
 
   @IsNumber({ allowInfinity: false, allowNaN: false })
-  age: number
+  age: number;
 
   @IsEnum(Genders)
-  gender: number
+  gender: number;
 
-  @IsArray()
-  pronounces: string[]
+  pronounces: string;
 
-  profilePicture: string
+  profilePicture: string;
 
   @Length(20, 1500)
-  bio: string
+  bio: string;
 
   @IsNotEmpty()
-  location: string
+  location: string;
 
   @IsNotEmpty()
-  country: string
-
+  country: string;
 }
