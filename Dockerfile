@@ -5,6 +5,6 @@ WORKDIR /opt/volunteer-search/user-service
 COPY *.json /
 COPY src /src
 
-RUN npm install
+RUN npm install --omit=dev
 
 CMD [ "npm", "start" ]
