@@ -33,6 +33,12 @@ export class AccountService {
     });
   }
 
+  async findOneByEmail(email: string): Promise<Account> {
+    return await this.accountRepository.findOneBy({
+      email: email,
+    });
+  }
+
   async update(id: number, updateAccountDto: UpdateAccountDto): Promise<void> {
     await this.accountRepository.update(
       {

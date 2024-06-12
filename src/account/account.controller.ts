@@ -19,16 +19,16 @@ export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
   @Post()
-  async create(@Body() createAccountDto: CreateAccountDto, @Res() response: Response) {
+  async create(@Body() createAccountDto: CreateAccountDto, @Res() response: Response): Promise<Response> {
     try{
       await this.accountService.create(createAccountDto);
       return response.status(201);
     } catch(e: any) {
       if (e instanceof QueryFailedError) {
-        console.log(e);
-        return response.status(400);
+        console.log(`Error while performing SQL request: ${e.message}`);
+        return response.status(400).send();
       }
-      throw e;
+      throw e; // JS is not the best language, is it?
     }
   }
 
@@ -40,6 +40,11 @@ export class AccountController {
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return await this.accountService.findOne(+id);
+  }
+
+  @Get(':email')
+  async findOneByEmail(@Param('email') email: string) {
+    return await this.accountService.findOneByEmail(email);
   }
 
   @Patch(':id')
